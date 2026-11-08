@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "SetupMaster: Iniciar aplicativo",
+      "type": "shell",
+      "command": "C:\\Program Files\\nodejs\\npm.cmd",
+      "args": ["start"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "SetupMaster: Gerar executável portátil",
+      "type": "shell",
+      "command": "C:\\Program Files\\nodejs\\npm.cmd",
+      "args": ["run", "dist:win"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ]
+}

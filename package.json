@@ -1,0 +1,59 @@
+{
+  "name": "setupmaster",
+  "version": "1.0.0",
+  "description": "Instalador de aplicativos Windows baseado em winget.",
+  "main": "main.js",
+  "author": "SetupMaster contributors",
+  "license": "MIT",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src.css -o ./app.css --minify",
+    "prestart": "tailwindcss -i ./src.css -o ./app.css --minify",
+    "start": "electron .",
+    "predist:win": "tailwindcss -i ./src.css -o ./app.css --minify",
+    "dist:win": "electron-builder --win nsis portable",
+    "dist:setup": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "predist:dir": "tailwindcss -i ./src.css -o ./app.css --minify",
+    "dist:dir": "electron-builder --win dir"
+  },
+  "devDependencies": {
+    "electron": "^36.0.0",
+    "electron-builder": "^26.0.12",
+    "simple-icons": "^16.36.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "build": {
+    "appId": "com.setupmaster.app",
+    "productName": "SetupMaster",
+    "asar": true,
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "app.css",
+      "assets/setupmaster.ico",
+      "assets/icons/**/*",
+      "licenses/**/*",
+      "package.json"
+    ],
+    "win": {
+      "icon": "assets/setupmaster.ico",
+      "target": ["nsis", "portable"]
+    },
+    "nsis": {
+      "artifactName": "SetupMaster-${version}-Setup.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SetupMaster",
+      "deleteAppDataOnUninstall": false
+    },
+    "portable": {
+      "artifactName": "SetupMaster-${version}-Portable.${ext}"
+    }
+  }
+}
